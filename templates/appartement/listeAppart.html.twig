@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{#<form class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="text" placeholder="Search">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+</form><br>#}
+
+<div id="contenu">
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+  
+    <h2>Liste des appartements</h2>
+    {#{% for appartement in appartements %}#}
+    <div id=search>
+    {{ form_start(form_recherche) }}
+
+         {#<div style="display:inline">#}
+            <label for="form_typappart">Type d'appartement</label>
+            {{ form_errors(form_recherche.typappart) }}
+            {{ form_widget(form_recherche.typappart) }}
+        
+
+        
+            <label for="form_arrondissement">Arrondissement</label>
+            {{ form_errors(form_recherche.arrondissement) }}
+            {{ form_widget(form_recherche.arrondissement) }}
+        
+
+        
+            <label for="form_prixLoc">Prix minimum de la location</label>
+            {{ form_errors(form_recherche.prixLoc) }}
+            {{ form_widget(form_recherche.prixLoc) }}
+        {#</div>#}
+
+        <button type="submit" class="btn btn-secondary my-2 my-sm-0">Rechercher</button>
+        
+    {{ form_end(form_recherche) }}
+    </div>
+    {#{% endfor %}#}
+
+    {#<a href="{{ path('rechercheAppart') }}"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Recherche</button></a>#}
+    {% if app.user %}
+    <a href="{{ path('ajoutAppart') }}"><button type="submit" class="btn btn-success">Ajouter un nouvelle appartement</button></a>
+    {% endif %}
+
+    <table>
+      <tr>
+        {% if app.user %}
+        <th>Numéro d'appartement</th>
+        {% endif %}
+        <th>Type d'appartement</th>
+        <th>Prix de location</th>
+        <th>Prix Charge</th>
+        <th>Rue</th>
+        <th>Arrondissement</th>
+        <th>Etage</th>
+        <th>Ascenseur</th>
+        <th>Préavis</th>
+        <th>Date libre</th>
+        {% if app.user %}
+        <th>Propriétaire</th>
+        <th>Locataire</th>
+        {% endif %}
+        <!--<th>NumAppart</th>-->
+      </tr>
+    {% for appartement in appartements %}
+      <tr>
+        {% if app.user %}
+        <td>{{ appartement.numappart }}</td>
+        {% endif %}
+        <td>{{ appartement.typeappart }}</td>
+        <td>{{ appartement.prixLoc }}</td>
+        <td>{{ appartement.prixCharg }}</td>
+        <td>{{ appartement.rue }}</td>
+        <td>{{ appartement.arrondissappart }}</td>
+        <td>{{ appartement.etage }}</td>
+        <td>{% if appartement.ascenseur == '1'%}Oui
+        {% else %}Non{% endif %}</td>
+        <td>{% if appartement.preavis == '1' %}Oui
+        {% else %}Non{% endif %}</td>
+        <td>{{ appartement.datelibre | date("d/m/Y") }}</td>
+        {% if app.user %}
+        {#{% for propriétaires in appartements %}#}
+        
+          <td><a href="{{ path('detailproprio', {'numappart':appartement.numappart, 'numeroprop':appartement.proprietaire})}}">
+            <button type="submit" class="btn btn-light">Détail</button>
+          </a></td>
+          <td><a href="{{ path('detailloc', {'numappart':appartement.numappart, 'numeroloc':appartement.locataire})}}">
+            <button type="submit" class="btn btn-light">Détail</button>
+          </a></td>
+          <td><a href="{{ path('modifierAppart', {'numappart':appartement.numappart}) }}">
+            <button type="submit" class="btn btn-info">Modifier</button>
+          </a></td>
+          <td><a href="{{ path('supprimerAppart', {'numappart':appartement.numappart}) }}">
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+          </a></td>
+        
+        {#{% endfor %}#}
+        {% endif %}
+
+      </tr>
+    {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}

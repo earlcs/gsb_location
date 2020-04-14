@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="contenu">
+
+    <a href="{{ path('listeLoc') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a>
+
+    <h2>Inscription locataire</h2>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form_start(form_locataire) }}
+
+    <div>
+        <label for="form_nom">Nom<span style="color:red;">*</span></label>
+        {{ form_errors(form_locataire.nomLoc) }}
+        {{ form_widget(form_locataire.nomLoc) }}
+    </div>
+
+    <div>
+        <label for="form_prenom">Prénom<span style="color:red;">*</span></label>
+        {{ form_errors(form_locataire.prenomLoc) }}
+        {{ form_widget(form_locataire.prenomLoc) }}
+    </div>
+
+    <div>
+        <label for="form_datenaiss">Date de naissance<span style="color:red;">*</span></label>
+        {{ form_errors(form_locataire.datenaiss) }}
+        {{ form_widget(form_locataire.datenaiss) }}
+    </div>
+
+    <div>
+        <label for="form_telLoc">Téléphone du locataire</label>
+        {{ form_errors(form_locataire.telLoc) }}
+        {{ form_widget(form_locataire.telLoc) }}
+    </div>
+
+    <div>
+        <label for="form_rib">RIB<span style="color:red;">*</span></label>
+        {{ form_errors(form_locataire.rib) }}
+        {{ form_widget(form_locataire.rib) }}
+    </div>
+
+    <div>
+        <label for="form_banque">Banque<span style="color:red;">*</span></label>
+        {{ form_errors(form_locataire.banque) }}
+        {{ form_widget(form_locataire.banque) }}
+    </div>
+
+    <div>
+        <label for="form_adresse">Adresse<span style="color:red;">*</span></label>
+        {{ form_errors(form_locataire.rueBanque) }}
+        {{ form_widget(form_locataire.rueBanque) }}
+    </div>
+
+    <div>
+        <label for="form_codevilleBanque">Code ville de la Banque<span style="color:red;">*</span></label>
+        {{ form_errors(form_locataire.codevilleBanque) }}
+        {{ form_widget(form_locataire.codevilleBanque) }}
+    </div>
+
+    <div>
+        <label for="form_telBanque">Téléphone de la Banque</label>
+        {{ form_errors(form_locataire.telBanque) }}
+        {{ form_widget(form_locataire.telBanque) }}
+    </div>
+
+    <button type="submit" class="btn btn-success">Valider</button>
+
+    {{ form_end(form_locataire) }}
+
+</div>
+
+{% endblock %}

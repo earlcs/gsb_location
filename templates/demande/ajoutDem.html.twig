@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="contenu">
+
+    <a href="{{ path('listeDem') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a>
+
+    {% if app.user %}
+    <h2>Ajouter une demande</h2>
+    {% else %}
+    <h2>Faire une demande de visite</h2>
+    {% endif %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form_start(form_demande) }}
+
+    <div>
+        <label for="form_demande">Client<span style="color:red;">*</span></label>
+        {{ form_errors(form_demande.numCli) }}
+        {{ form_widget(form_demande.numCli) }}
+        {#<input type="text" class="form-control" id="form_pseudo" name="form[pseudo]" />#}
+    </div>
+
+    <div>
+        <label for="form_typeDem">Type de demande<span style="color:red;">*</span></label>
+        {{ form_errors(form_demande.typeDem) }}
+        {{ form_widget(form_demande.typeDem) }}
+        {#<input type="text" class="form-control" id="form_email" name="form[email]" aria-describedby="emailHelp"/>#}
+    </div>
+
+    <div>
+        <label for="form_arrondissDem">Arrondissement<span style="color:red;">*</span></label>
+        {{ form_errors(form_demande.arrondissDem) }}
+        {{ form_widget(form_demande.arrondissDem) }}
+        {#<input type="password" class="form-control" id="form_mdp" name="form[mdp]" />#}
+    </div>
+
+    <div>
+        <label for="form_dateLimite">Date limite<span style="color:red;">*</span></label>
+        {{ form_errors(form_demande.dateLimite) }}
+        {{ form_widget(form_demande.dateLimite) }}
+        {#<input type="password" class="form-control" id="form_mdp" name="form[mdp]" />#}
+    </div>
+
+    <button type="submit" class="btn btn-success">Valider</button>
+    {#<button type="submit" class="btn btn-success">Annuler</button>#}
+
+    {{ form_end(form_demande) }}
+
+</div>
+
+{% endblock %}

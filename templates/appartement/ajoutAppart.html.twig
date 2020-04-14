@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="contenu">
+
+    <a href="{{ path('listeAppart') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a>
+
+    <h2>Ajouter appartement</h2>
+
+        {{ form_start(form_appart) }}
+
+        <div>
+            <label for="form_typappart">Type d'appartement<span style="color:red;">*</span></label>
+            {{ form_errors(form_appart.typappart) }}
+            {{ form_widget(form_appart.typappart) }}
+        </div>
+
+        <div>
+            <label for="form_prixLoc">Prix de location<span style="color:red;">*</span></label>
+            {{ form_errors(form_appart.prixLoc) }}
+            {{ form_widget(form_appart.prixLoc) }}
+        </div>
+
+        <div>
+            <label for="form_prixCharg">Prix de charge<span style="color:red;">*</span></label>
+            {{ form_errors(form_appart.prixCharg) }}
+            {{ form_widget(form_appart.prixCharg) }}
+        </div>
+
+        <div>
+            <label for="form_rue">Rue<span style="color:red;">*</span></label>
+            {{ form_errors(form_appart.rue) }}
+            {{ form_widget(form_appart.rue) }}
+        </div>
+
+        <div>
+            <label for="form_arrondissement">Arrondissement</label>
+            {{ form_errors(form_appart.arrondissement) }}
+            {{ form_widget(form_appart.arrondissement) }}
+        </div>
+
+        <div>
+            <label for="form_etage">Etage</label>
+            {{ form_errors(form_appart.etage) }}
+            {{ form_widget(form_appart.etage) }}
+        </div>
+
+        <div>
+            <label for="form_ascenseur">Ascenseur</label>
+            {{ form_errors(form_appart.ascenseur) }}
+            {{ form_widget(form_appart.ascenseur) }}
+        </div>
+
+        <div>
+            <label for="form_preavis">Préavis</label>
+            {{ form_errors(form_appart.preavis) }}
+            {{ form_widget(form_appart.preavis) }}
+        </div>
+
+        <div>
+            <label for="form_dateLibre">Date libre</label>
+            {{ form_errors(form_appart.dateLibre) }}
+            {{ form_widget(form_appart.dateLibre) }}
+        </div>
+
+        <div>
+            <label for="form_numeroprop">Propriétaire</label>
+            {{ form_errors(form_appart.numeroprop) }}
+            {{ form_widget(form_appart.numeroprop) }}
+        </div>
+
+        <div>
+            <label for="form_numeroloc">Locataire</label>
+            {{ form_errors(form_appart.numeroloc) }}
+            {{ form_widget(form_appart.numeroloc) }}
+        </div>
+
+        {#<button type="submit" class="btn btn-success">Valider</button>
+        <button type="submit" class="btn btn-success">Annuler</button>#}
+        
+        {{ form_end(form_appart) }}
+
+</div>
+
+{% endblock %}

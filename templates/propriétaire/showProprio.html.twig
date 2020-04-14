@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="contenu">
+
+    <h2>Propriétaire n°{{ numeroprop.numeroprop }}</h2>
+    <div>
+        <p><b>Nom et Prénom : </b>{{ numeroprop.nom }} {{ numeroprop.prenom }}</p>
+        <p><b>Adresse : </b>{{ numeroprop.adresse }}</p>
+        <p><b>Code postal : </b>{{ numeroprop.codeVille }}</p>
+        <p><b>Numéro de téléphone : </b>{{ numeroprop.tel }}</p>
+    </div>
+
+</div>
+
+{% endblock %}

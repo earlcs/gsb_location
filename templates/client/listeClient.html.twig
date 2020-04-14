@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!--<form class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="text" placeholder="Search">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+</form><br>-->
+
+<div id="contenu">
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h2>Liste des clients</h2>
+    <a href="{{ path('ajoutclient') }}"><button type="submit" class="btn btn-success">Ajouter un nouveau client</button></a>
+    <table>
+      <tr>
+        <th>Numéro de client</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Adresse</th>
+        <th>Code Ville</th>
+        <th>Téléphone</th>
+        <th>Identifiant</th>
+        <th>Mot de passe</th>
+      </tr>
+    {% for client in clients %}
+      <tr>
+        <td>{{ client.numCli }}</td>
+        <td>{{ client.nomCli }}</td>
+        <td>{{ client.prenomCli }}</td>
+        <td>{{ client.adresseCli }}</td>
+        <td>{{ client.codevilleCli }}</td>
+        <td>{{ client.telCli }}</td>
+        <td>{{ client.username }}</td>
+        <td>{{ client.password }}</td>
+        <td><a href="{{ path('modifierCli', {'numCli':client.numCli}) }}">
+          <button type="submit" class="btn btn-info">Modifier</button>
+        </a></td>
+        <td><a href="{{ path('supprimerCli', {'numCli':client.numCli}) }}">
+          <button type="submit" class="btn btn-danger">Supprimer</button>
+        </a></td>
+      </tr>
+    {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}

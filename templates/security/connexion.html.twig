@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="contenu">
+
+    <h2>Identification utilisateur</h2><br>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <form action="{{ path('security_login') }}" method="post">
+
+        <div class="form-group">
+            <label>Login<span style="color: red">*</span></label>
+            <input placeholder="Nom d'identification" required id="pseudo" name="_username" type="text" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Mot de passe<span style="color: red">*</span></label>
+            <input placeholder="Mot de passe" required id="mdp" name="_password" type="password" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Se connecter</button>
+        </div>
+    
+    </form>
+
+</div>
+
+        {#<p>
+        <label for="nom">Login<span style="color:red;">*</span></label>
+        <input id="login" type="text" name="login"  size="30" maxlength="45" value="">
+        </p>
+        <p>
+            <label for="mdp">Mot de passe<span style="color:red;">*</span></label>
+            <input id="mdp"  type="password"  name="mdp" size="30" maxlength="45">
+        </p>
+            <input type="submit" value="Valider" name="valider">
+            <input type="reset" value="Annuler" name="annuler"> 
+        </p>#}
+    
+
+{% endblock %}

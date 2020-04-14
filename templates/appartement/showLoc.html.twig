@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="contenu">
+
+    <a href="{{ path('listeAppart') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a>
+
+    <h2>Locataire de l'appartement n°{{ appartement.numappart }}</h2>
+    <div>
+        <p><b>Numéro du locataire : </b>{{ locataire.numeroloc }}</p>
+        <p><b>Nom et Prénom : </b>{{ locataire.nomLoc }} {{ locataire.prenomLoc }}</p>
+        <p><b>Date de naissance : </b>{{ locataire.datenaiss | date("d/m/Y")}}</p>
+        <p><b>Téléphone : </b>{{ locataire.telLoc }}</p>
+        <p><b>RIB : </b>{{ locataire.rib }}</p>
+        <p><b>Banque : </b>{{ locataire.banque }}</p>
+        <p><b>Adresse de la banque : </b>{{ locataire.rueBanque }}</p>
+        <p><b>Code ville de la banque : </b>{{ locataire.codevilleBanque }}</p>
+        <p><b>Téléphone de la banque : </b>{{ locataire.telBanque }}</p>
+    </div>
+
+</div>
+
+{% endblock %}

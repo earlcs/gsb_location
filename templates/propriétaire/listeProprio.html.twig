@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!--<form class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="text" placeholder="Search">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+</form><br>-->
+
+<div id="contenu">
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h2>Liste des propriétaires</h2>
+    <a href="{{ path('ajoutproprio') }}"><button type="submit" class="btn btn-success">Ajouter un nouveau propriétaire</button></a>
+    <table>
+      <tr>
+        <th>Numéro de propriétaire</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Adresse</th>
+        <th>Code ville</th>
+        <th>Téléphone</th>
+      </tr>
+    {% for propriétaire in propriétaires %}
+      <tr>
+        <td>{{ propriétaire.numeroprop }}</td>
+        <td>{{ propriétaire.nom }}</td>
+        <td>{{ propriétaire.prenom }}</td>
+        <td>{{ propriétaire.adresse }}</td>
+        <td>{{ propriétaire.codeville }}</td>
+        <td>{{ propriétaire.tel }}</td>
+        <td><a href="{{ path('modifierProprio', {'numeroprop':propriétaire.numeroprop}) }}">
+          <button type="submit" class="btn btn-info">Modifier</button>
+        </a></td>
+        <td><a href="{{ path('supprimerProprio', {'numeroprop':propriétaire.numeroprop}) }}">
+          <button type="submit" class="btn btn-danger">Supprimer</button>
+        </a></td>
+      </tr>
+    {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}

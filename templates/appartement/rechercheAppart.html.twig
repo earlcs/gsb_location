@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="contenu">
+
+    <a href="{{ path('listeAppart') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a>
+    <h2>Recherche d'appartement</h2>
+
+    {{ form_start(form_recherche) }}
+
+         <div>
+            <label for="form_typappart">Type d'appartement<span style="color:red;">*</span></label>
+            {{ form_errors(form_recherche.typappart) }}
+            {{ form_widget(form_recherche.typappart) }}
+        </div>
+
+        <div>
+            <label for="form_arrondissement">Arrondissement</label>
+            {{ form_errors(form_recherche.arrondissement) }}
+            {{ form_widget(form_recherche.arrondissement) }}
+        </div>
+
+        <div>
+            <label for="form_prixLoc">Prix minimum de la location<span style="color:red;">*</span></label>
+            {{ form_errors(form_recherche.prixLoc) }}
+            {{ form_widget(form_recherche.prixLoc) }}
+        </div>
+
+        {#<div>
+            <label for="form_prixLoc">Prix minimum de la location<span style="color:red;">*</span></label>
+            <input type="text" class="form-control"></input>
+            {{ form_errors(form_recherche.prixLoc) }}
+            {{ form_widget(form_recherche.prixLoc) }}
+            <input type="text" class="form-control" id="form_email" name="form[email]" aria-describedby="emailHelp"/>
+        </div>#}
+
+        {#<div>
+            <label for="form_prixCharg">Prix maximum de la location<span style="color:red;">*</span></label>
+            <input type="text" class="form-control"></input>
+            {{ form_errors(form_recherche.prixLoc) }}
+            {{ form_widget(form_recherche.prixLoc) }}
+            <input type="password" class="form-control" id="form_mdp" name="form[mdp]" />
+        </div>#}
+
+        
+
+        <button type="submit" class="btn btn-success">Rechercher</button>
+        
+        {{ form_end(form_recherche) }}
+
+        <table>
+      <tr>
+        {% if app.user %}
+        <th>Numéro d'appartement</th>
+        {% endif %}
+        <th>Type d'appartement</th>
+        <th>Prix de location</th>
+        <th>Prix Charge</th>
+        <th>Rue</th>
+        <th>Arrondissement</th>
+        <th>Etage</th>
+        <th>Ascenseur</th>
+        <th>Préavis</th>
+        <th>Date libre</th>
+        {#{% if app.user %}
+        <th>Propriétaire</th>
+        <th>Locataire</th>
+        {% endif %}#}
+        <!--<th>NumAppart</th>-->
+      </tr>
+    {% for appartement in appartements %}
+      <tr>
+        {% if app.user %}
+        <td>{{ appartement.numappart }}</td>
+        {% endif %}
+        <td>{{ appartement.typeappart }}</td>
+        <td>{{ appartement.prixLoc }}</td>
+        <td>{{ appartement.prixCharg }}</td>
+        <td>{{ appartement.rue }}</td>
+        <td>{{ appartement.arrondissappart }}</td>
+        <td>{{ appartement.etage }}</td>
+        <td>{% if appartement.ascenseur == '1'%}Oui
+        {% else %}Non{% endif %}</td>
+        <td>{% if appartement.preavis == '1' %}Oui
+        {% else %}Non{% endif %}</td>
+        <td>{{ appartement.datelibre | date("d/m/Y") }}</td>
+        
+
+      </tr>
+    {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}

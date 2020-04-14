@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!--<form class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="text" placeholder="Search">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+</form><br>-->
+
+<div id="contenu">
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h2>Liste des locataires</h2>
+    <a href="{{ path('ajoutLoc') }}"><button type="submit" class="btn btn-success">Ajouter un nouveau locataire</button></a>
+    <table>
+      <tr>
+        <th>Numéro de locataire</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Date de naissance</th>
+        <th>Téléphone</th>
+        <th>RIB</th>
+        <th>Banque</th>
+        <th>Rue de la banque</th>
+        <th>Code ville de la banque</th>
+        <th>Téléphone de la banque</th>
+        
+      </tr>
+    {% for locataire in locataires %}
+      <tr>
+        <td>{{ locataire.numeroLoc }}</td>
+        <td>{{ locataire.nomLoc }}</td>
+        <td>{{ locataire.prenomLoc }}</td>
+        <td>{{ locataire.datenaiss | date("d/m/Y")}}</td>
+        <td>{{ locataire.telLoc }}</td>
+        <td>{{ locataire.rib }}</td>
+        <td>{{ locataire.banque }}</td>
+        <td>{{ locataire.rueBanque }}</td>
+        <td>{{ locataire.codevilleBanque }}</td>
+        <td>{{ locataire.telBanque }}</td>
+        <td><a href="{{ path('modifierLoc', {'numeroloc':locataire.numeroloc}) }}">
+          <button type="submit" class="btn btn-info">Modifier</button>
+        </a></td>
+        <td><a href="{{ path('supprimerLoc', {'numeroloc':locataire.numeroloc}) }}">
+          <button type="submit" class="btn btn-danger">Supprimer</button>
+        </a></td>
+      </tr>
+    {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}

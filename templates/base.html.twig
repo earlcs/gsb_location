@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}GSB - Location d'appartement{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css')}}" />
+        <!--<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}" />-->
+        <link rel="stylesheet/scss" href="{{ asset('scss/_bootswatch.scss')}}" />
+        <link rel="stylesheet/scss" href="{{ asset('scss/_variables.scss')}}" />
+        
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ asset('') }}"><img src="{{ asset('images/logo.jpg')}}" id="logoGSB" /></a>
+        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav mr-auto nav nav-tabs">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ asset('')}}">Accueil <span class="sr-only">(current)</span></a>
+            </li>
+
+            {% if not app.user %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ asset('inscription')}}">Créer un compte</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ asset('client/ajouter')}}">Inscription Client</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ asset('demande/ajouter')}}">Demande de visite</a>
+            </li>
+            {% endif %}
+
+            {% if app.user %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Appartement</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ path('listeAppart')}}">Consulter des appartements</a>
+                    <a class="dropdown-item" href="{{ path('ajoutAppart')}}">Ajouter des appartements</a>
+                    <!--<a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>-->
+                </div>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('listeAppart')}}">Consulter des appartements</a>
+            </li>
+            {% endif %}
+            
+            {% if app.user %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ asset('client/liste')}}">Client</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ asset('locataire/liste')}}">Locataire</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ asset('propriétaire/liste')}}">Propriétaire</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('listeDem')}}">Consulter les demandes</a>
+            </li>
+            {% endif %}
+
+            {% if not app.user %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('security_login')}}">Connexion</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('security_logout')}}">Déconnexion</a>
+            </li>
+            {% endif %}
+
+            
+            <!--<li>
+                <a class="nav-link">Propriétaire*</a>
+                <select name="numprop" id="numprop">
+                    <option value="3" label="berger simone">berger simone</option>
+                    <option value="4" label="ravasin helene">ravasin helene</option>
+                    <option value="5" label="calvennet patricia">calvennet patricia</option>
+                    <option value="6" label="tampale daniele">tampale daniele</option>
+                    <option value="7" label="giraud bernadette">giraud bernadette</option>
+                    <option value="9" label="gardines jules">gardines jules</option>
+                    <option value="10" label="guillette helene">guillette helene</option>
+                    <option value="11" label="gallyna noel">gallyna noel</option>
+                    <option value="12" label="geurmat bernadette">geurmat bernadette</option>
+                    <option value="500" label="code 500">code 500</option>
+                </select>
+            </li>-->
+
+            <!--<li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="user"><i class="fas fa-user"></i> <span class="caret"></span></a>
+              <div class="dropdown-menu" aria-labelledby="user">
+                <a class="dropdown-item" href="#">Se connecter</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">S'inscrire</a>-->
+                <!--<a class="dropdown-item" href="../_vendor/bootstrap/dist/css/bootstrap.css" download>bootstrap.css</a>-->
+              <!--</div>
+            </li>-->
+            </ul>
+            <!--<form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>-->
+        </div>
+    </nav>
+    <div id="separator"></div>
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

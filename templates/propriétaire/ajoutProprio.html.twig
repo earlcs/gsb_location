@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="contenu">
+
+    <a href="{{ path('listeproprio') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a>
+
+    <h2>Ajouter propriétaire</h2>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form_start(form_proprio) }}
+
+    <div>
+        <label for="form_nom">Nom<span style="color:red;">*</span></label>
+        {{ form_errors(form_proprio.nom) }}
+        {{ form_widget(form_proprio.nom) }}
+        {#<input type="text" class="form-control" id="form_pseudo" name="form[pseudo]" />#}
+    </div>
+
+    <div>
+        <label for="form_prenom">Prénom<span style="color:red;">*</span></label>
+        {{ form_errors(form_proprio.prenom) }}
+        {{ form_widget(form_proprio.prenom) }}
+        {#<input type="text" class="form-control" id="form_email" name="form[email]" aria-describedby="emailHelp"/>#}
+    </div>
+
+    <div>
+        <label for="form_adresse">Adresse<span style="color:red;">*</span></label>
+        {{ form_errors(form_proprio.adresse) }}
+        {{ form_widget(form_proprio.adresse) }}
+        {#<input type="password" class="form-control" id="form_mdp" name="form[mdp]" />#}
+    </div>
+
+    <div>
+        <label for="form_codeville">Code ville<span style="color:red;">*</span></label>
+        {{ form_errors(form_proprio.codeVille) }}
+        {{ form_widget(form_proprio.codeVille) }}
+        {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+    </div>
+
+    <div>
+        <label for="form_tel">Téléphone</label>
+        {{ form_errors(form_proprio.tel) }}
+        {{ form_widget(form_proprio.tel) }}
+        {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+    </div>
+
+    <button type="submit" class="btn btn-success">Valider</button>
+    {#<button type="submit" class="btn btn-success">Annuler</button>#}
+
+    {{ form_end(form_proprio) }}
+
+</div>
+
+{% endblock %}

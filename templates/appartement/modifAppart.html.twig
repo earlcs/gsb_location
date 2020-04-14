@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="contenu">
+
+    <a href="{{ path('listeAppart') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a>
+
+    <h2>Modifier appartement</h2>
+
+        {{ form_start(form_appart) }}
+
+        <div>
+            <label for="form_typappart">Type d'appartement<span style="color:red;">*</span></label>
+            {{ form_errors(form_appart.typappart) }}
+            {{ form_widget(form_appart.typappart) }}
+            {#<input type="text" class="form-control" id="form_pseudo" name="form[pseudo]" />#}
+        </div>
+
+        <div>
+            <label for="form_prixLoc">Prix de location<span style="color:red;">*</span></label>
+            {{ form_errors(form_appart.prixLoc) }}
+            {{ form_widget(form_appart.prixLoc) }}
+            {#<input type="text" class="form-control" id="form_email" name="form[email]" aria-describedby="emailHelp"/>#}
+        </div>
+
+        <div>
+            <label for="form_prixCharg">Prix de charge<span style="color:red;">*</span></label>
+            {{ form_errors(form_appart.prixCharg) }}
+            {{ form_widget(form_appart.prixCharg) }}
+            {#<input type="password" class="form-control" id="form_mdp" name="form[mdp]" />#}
+        </div>
+
+        <div>
+            <label for="form_rue">Rue<span style="color:red;">*</span></label>
+            {{ form_errors(form_appart.rue) }}
+            {{ form_widget(form_appart.rue) }}
+            {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+        </div>
+
+        <div>
+            <label for="form_arrondissement">Arrondissement</label>
+            {{ form_errors(form_appart.arrondissement) }}
+            {{ form_widget(form_appart.arrondissement) }}
+            {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+        </div>
+
+        <div>
+            <label for="form_etage">Etage</label>
+            {{ form_errors(form_appart.etage) }}
+            {{ form_widget(form_appart.etage) }}
+            {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+        </div>
+
+        <div>
+            <label for="form_ascenseur">Ascenseur</label>
+            {{ form_errors(form_appart.ascenseur) }}
+            {{ form_widget(form_appart.ascenseur) }}
+            {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+        </div>
+
+        <div>
+            <label for="form_preavis">Préavis</label>
+            {{ form_errors(form_appart.preavis) }}
+            {{ form_widget(form_appart.preavis) }}
+            {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+        </div>
+
+        <div>
+            <label for="form_dateLibre">Date libre</label>
+            {{ form_errors(form_appart.dateLibre) }}
+            {#<div class="input-append date form_datetime">
+                <input size="16" type="text" value="{{ form_appart.dateLibre }}" readonly>
+                <span class="add-on"><i class="icon-th"></i></span>
+            </div>
+            
+            <script type="text/javascript">
+                $(".form_datetime").datetimepicker({
+                    format: "dd MM yyyy - hh:ii"
+                });
+            </script>#} 
+            {{ form_widget(form_appart.dateLibre) }}
+            {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+        </div>
+
+        <div>
+            <label for="form_numeroprop">Propriétaire</label>
+            {{ form_errors(form_appart.numeroprop) }}
+            {#<select class="form-control">
+                <option>Séléctionner un propriétaire</option>
+                <option value={{ form_appart.NomPrenom }}></option
+            </select>#}
+            {{ form_widget(form_appart.numeroprop) }}
+            {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+        </div>
+
+        <div>
+            <label for="form_numeroloc">Locataire</label>
+            {{ form_errors(form_appart.numeroloc) }}
+            {#<select class="form-control">
+                <option>Séléctionner un locataire</option>
+                <option value={{ form_appart.NomPrenomLoc }}></option
+            </select>#}
+            {{ form_widget(form_appart.numeroloc) }}
+            {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+        </div>
+
+        {#<button type="submit" class="btn btn-success">Valider</button>
+        <button type="submit" class="btn btn-success">Annuler</button>#}
+        
+        {{ form_end(form_appart) }}
+
+        
+    {#</form>#}
+
+</div>
+
+<!--<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <strong class="mr-auto">Bootstrap</strong>
+    <small>11 mins ago</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+    Hello, world! This is a toast message.
+  </div>
+</div>-->
+
+{% endblock %}

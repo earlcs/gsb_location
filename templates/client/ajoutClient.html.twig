@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="contenu">
+
+    <a href="{{ path('clients') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a>
+
+    <h2>Inscription client</h2>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form_start(form_client) }}
+
+    <div>
+        <label for="form_nom">Nom<span style="color:red;">*</span></label>
+        {{ form_errors(form_client.nomCli) }}
+        {{ form_widget(form_client.nomCli) }}
+        {#<input type="text" class="form-control" id="form_pseudo" name="form[pseudo]" />#}
+    </div>
+
+    <div>
+        <label for="form_prenom">Prénom<span style="color:red;">*</span></label>
+        {{ form_errors(form_client.prenomCli) }}
+        {{ form_widget(form_client.prenomCli) }}
+        {#<input type="text" class="form-control" id="form_email" name="form[email]" aria-describedby="emailHelp"/>#}
+    </div>
+
+    <div>
+        <label for="form_adresse">Adresse<span style="color:red;">*</span></label>
+        {{ form_errors(form_client.adresseCli) }}
+        {{ form_widget(form_client.adresseCli) }}
+        {#<input type="password" class="form-control" id="form_mdp" name="form[mdp]" />#}
+    </div>
+
+    <div>
+        <label for="form_codeville">Code ville<span style="color:red;">*</span></label>
+        {{ form_errors(form_client.codevilleCli) }}
+        {{ form_widget(form_client.codevilleCli) }}
+        {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+    </div>
+
+    <div>
+        <label for="form_tel">Téléphone</label>
+        {{ form_errors(form_client.telCli) }}
+        {{ form_widget(form_client.telCli) }}
+        {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+    </div>
+
+    <div>
+        <label for="form_pseudo">Nom d'utilisateur<span style="color:red;">*</span></label>
+        {{ form_errors(form_client.username) }}
+        {{ form_widget(form_client.username) }}
+        {#<input type="text" class="form-control" id="form_pseudo" name="form[pseudo]" />#}
+    </div>
+
+     <div>
+        <label for="form_mdp">Mot de passe<span style="color:red;">*</span></label>
+        {{ form_errors(form_client.password) }}
+        {{ form_widget(form_client.password) }}
+        {#<input type="password" class="form-control" id="form_mdp" name="form[mdp]" />#}
+    </div>
+
+    <div>
+        <label for="form_confirm_mdp">Confirmer le mot de passe<span style="color:red;">*</span></label>
+        {{ form_errors(form_client.confirm_mdp) }}
+        {{ form_widget(form_client.confirm_mdp) }}
+        {#<input type="password" class="form-control" id="form_confirm_mdp" name="form[confirm_mdp]" />#}
+    </div>
+
+    <button type="submit" class="btn btn-success">Valider</button>
+    {#<button type="submit" class="btn btn-success">Annuler</button>#}
+
+    {{ form_end(form_client) }}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div id="contenu">
+
+    <a href="{{ path('listeAppart') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a>
+
+    <h2>Propriétaire de l'appartement n°{{ appartement.numappart }}</h2>
+    <div>
+        <p><b>Numéro du propriétaire : </b>{{ propriétaire.numeroprop }}</p>
+        <p><b>Nom et Prénom : </b>{{ propriétaire.nom }} {{ propriétaire.prenom }}</p>
+        <p><b>Adresse : </b>{{ propriétaire.adresse }}</p>
+        <p><b>Code postal : </b>{{ propriétaire.codeVille }}</p>
+        <p><b>Numéro de téléphone : </b>{{ propriétaire.tel }}</p>
+    </div>
+
+</div>
+
+{% endblock %}

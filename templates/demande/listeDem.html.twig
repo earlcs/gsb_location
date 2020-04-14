@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!--<form class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="text" placeholder="Search">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+</form><br>-->
+
+<div id="contenu">
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h2>Liste des demandes</h2>
+    <a href="{{ path('ajoutDem') }}"><button type="submit" class="btn btn-success">Ajouter une nouvelle demande</button></a>
+    <table>
+      <tr>
+        <th>Numéro de demande</th>
+        <th>Numéro de client</th>
+        <th>Type de demande</th>
+        <th>Date limite</th>
+      </tr>
+    {% for demande in demandes %}
+      <tr>
+        <td>{{ demande.numDem }}</td>
+        <td>{{ demande.clients }}</td>
+        <td>{{ demande.typeappart }}</td>
+        <td>{{ demande.dateLimite | date("d/m/Y") }}</td>
+        {% if app.user %}
+          <td><a href="{{ path('modifierDem', {'numDem':demande.numDem}) }}">
+            <button type="submit" class="btn btn-info">Modifier</button>
+          </a></td>
+          <td><a href="{{ path('supprimerDem', {'numDem':demande.numDem}) }}">
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+          </a></td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}
