@@ -58,7 +58,7 @@ class AppartementsController extends AbstractController
             return $this->redirectToRoute('listeAppart');
 
         };
-        dump($appart);
+        //dump($appart);
         return $this->render('appartement/ajoutAppart.html.twig', [
             'form_appart' => $form->createView(),
         ]);
@@ -186,7 +186,7 @@ class AppartementsController extends AbstractController
         $sql = $em->getConnection()->prepare($req);
         $sql->execute();
         $rs = $sql->fetchAll();
-        dump($rs);
+        //dump($rs);
         //$em->persist($appart);
         //$em->flush();
 
@@ -219,7 +219,7 @@ class AppartementsController extends AbstractController
         $sql->execute();
 
         $rs = $sql->fetchAll();
-        dump($rs);
+        //dump($rs);
 
         return $this->render('appartement/showProprio.html.twig', [
             'appartement' => $appart,
@@ -245,7 +245,7 @@ class AppartementsController extends AbstractController
         $sql->execute();
 
         $rs = $sql->fetchAll();
-        dump($rs);
+        //dump($rs);
 
         return $this->render('appartement/showLoc.html.twig', [
             'appartement' => $appart,

@@ -20,7 +20,7 @@ class LocatairesController extends AbstractController
     public function getLocataires()
     {
         $locataires = $this->getDoctrine()->getRepository(Locataires::class)->findAll();
-        dump($locataires);
+        //dump($locataires);
         return $this->render('locataire/listeLoc.html.twig', array(
             'locataires' => $locataires,
         ));
@@ -52,7 +52,7 @@ class LocatairesController extends AbstractController
             return $this->redirectToRoute('listeLoc');
 
         };
-        dump($locataire);
+        //dump($locataire);
 
         return $this->render('locataire/ajoutLoc.html.twig', [
             'form_locataire' => $form->createView(),
@@ -82,7 +82,7 @@ class LocatairesController extends AbstractController
             return $this->redirectToRoute('listeLoc');
 
         };
-        dump($loc);
+        //dump($loc);
 
         return $this->render('locataire/ajoutLoc.html.twig', [
             'form_locataire' => $form->createView(),

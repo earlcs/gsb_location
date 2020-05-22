@@ -41,7 +41,7 @@ class DemandesController extends AbstractController
             return $this->redirectToRoute('listeDem');
 
         };
-        dump($demande);
+        //dump($demande);
 
         return $this->render('demande/ajoutDem.html.twig', [
             'form_demande' => $form->createView(),
@@ -62,7 +62,7 @@ class DemandesController extends AbstractController
         $sql = $em->getConnection()->prepare($dem);
         $sql->execute();
         $rs = $sql->fetchAll();
-        dump($rs);
+        //dump($rs);
 
         return $this->render('demande/listeDem.html.twig', array(
             'demandes' => $rs,
@@ -89,7 +89,7 @@ class DemandesController extends AbstractController
             return $this->redirectToRoute('listeDem');
 
         };
-        dump($dem);
+        //dump($dem);
 
         return $this->render('demande/ajoutDem.html.twig', [
             'form_demande' => $form->createView(),
