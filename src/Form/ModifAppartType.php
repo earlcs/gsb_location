@@ -103,13 +103,13 @@ class ModifAppartType extends AbstractType
                 'class' => "form-control"
             ]
         ))
-        ->add('save', SubmitType::class, array(
+        /*->add('save', SubmitType::class, array(
             'label' => 'Valider',
             'attr' => [
                 'class' => 'btn btn-success',
                 
             ]
-        ));
+        ))*/;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -7,9 +7,9 @@
     <a href="{{ path('listeDem') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a>
 
     {% if app.user %}
-    <h2>Ajouter une demande</h2>
+        <h3>Ajouter une demande</h3>
     {% else %}
-    <h2>Faire une demande de visite</h2>
+        <h3>Faire une demande de visite</h3>
     {% endif %}
 
     {% for message in app.flashes('success') %}
@@ -34,12 +34,11 @@
         {#<input type="text" class="form-control" id="form_email" name="form[email]" aria-describedby="emailHelp"/>#}
     </div>
 
-    <div>
+    {#<div>
         <label for="form_arrondissDem">Arrondissement<span style="color:red;">*</span></label>
         {{ form_errors(form_demande.arrondissDem) }}
         {{ form_widget(form_demande.arrondissDem) }}
-        {#<input type="password" class="form-control" id="form_mdp" name="form[mdp]" />#}
-    </div>
+    </div>#}
 
     <div>
         <label for="form_dateLimite">Date limite<span style="color:red;">*</span></label>

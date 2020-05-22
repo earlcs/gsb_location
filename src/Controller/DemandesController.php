@@ -41,6 +41,7 @@ class DemandesController extends AbstractController
             return $this->redirectToRoute('listeDem');
 
         };
+        dump($demande);
 
         return $this->render('demande/ajoutDem.html.twig', [
             'form_demande' => $form->createView(),
@@ -55,10 +56,16 @@ class DemandesController extends AbstractController
      */
     public function getDemandes()
     {
-        $dem = $this->getDoctrine()->getRepository(Demandes::class)->findAll();
+        //$dem = $this->getDoctrine()->getRepository(Demandes::class)->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $dem = "select c.NOM_CLI, c.PRENOM_CLI, d.NUM_CLI, d.NUM_DEM, d.TYPE_DEM, d.DATE_LIMITE from demandes d join clients c on d.NUM_CLI=c.NUM_CLI";
+        $sql = $em->getConnection()->prepare($dem);
+        $sql->execute();
+        $rs = $sql->fetchAll();
+        dump($rs);
 
         return $this->render('demande/listeDem.html.twig', array(
-            'demandes' => $dem,
+            'demandes' => $rs,
         ));
     }
 
@@ -82,6 +89,7 @@ class DemandesController extends AbstractController
             return $this->redirectToRoute('listeDem');
 
         };
+        dump($dem);
 
         return $this->render('demande/ajoutDem.html.twig', [
             'form_demande' => $form->createView(),

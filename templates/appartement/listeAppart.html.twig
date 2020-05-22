@@ -15,39 +15,141 @@
         </div>
     {% endfor %}
   
-    <h2>Liste des appartements</h2>
+    <h3>Liste des appartements</h3>
     {#{% for appartement in appartements %}#}
-    <div id=search>
-    {{ form_start(form_recherche) }}
+    {#<div id=search>
+    {{ form_start(form_recherche) }}#}
 
          {#<div style="display:inline">#}
-            <label for="form_typappart">Type d'appartement</label>
-            {{ form_errors(form_recherche.typappart) }}
-            {{ form_widget(form_recherche.typappart) }}
+            {#<label for="form_typappart">Type d'appartement</label>
+            {{ form_errors(form_recherche.typeappart) }}
+            {{ form_widget(form_recherche.typeappart) }}
         
 
         
             <label for="form_arrondissement">Arrondissement</label>
-            {{ form_errors(form_recherche.arrondissement) }}
-            {{ form_widget(form_recherche.arrondissement) }}
+            {{ form_errors(form_recherche.arrondissappart) }}
+            {{ form_widget(form_recherche.arrondissappart) }}
         
 
         
             <label for="form_prixLoc">Prix minimum de la location</label>
             {{ form_errors(form_recherche.prixLoc) }}
-            {{ form_widget(form_recherche.prixLoc) }}
-        {#</div>#}
+            {{ form_widget(form_recherche.prixLoc) }}#}
+        {#</div>
 
-        <button type="submit" class="btn btn-secondary my-2 my-sm-0">Rechercher</button>
+        <button type="submit" class="btn btn-secondary my-2 my-sm-0">Rechercher</button>#}
+        {#{{ form_widget(form_recherche.save) }}
         
     {{ form_end(form_recherche) }}
-    </div>
+    </div>#}
     {#{% endfor %}#}
+
+    <div id=search>
+      <form method="post">
+
+        <table id="recherche">
+
+          <tr>
+            <td>Type d'apartement</td>
+            <td>Arrondissement</td>
+            <td>Prix minimum de la location</td>
+            <td>Prix maximum de la location</td>
+          </tr>
+
+          <tr>
+          <td><select name='typeappart' class="form-control">
+              <option value=''></option>
+            {% for type in types %}
+              <option value='{{type.typeappart}}'>{{type.typeappart}}</option>
+            {% endfor %}
+          </select></td>
+          <td><select name='arrondissement' class="form-control">
+              <option value=''></option>
+            {% for arrondissement in arrondissements %}
+              <option value='{{arrondissement.arrondissDem}}'>{{arrondissement.arrondissDem}}</option>
+            {% endfor %}
+          </select></td>
+          <td><input class="form-control" type="number" name="prixLocMin"></td>
+          <td><input class="form-control" type="number" name="prixLocMax"></td>
+          {#{% if 'prixLocMin' is not empty %}
+          <td><input class="form-control" type="number" name="prixLocMin"></td>
+          <td><input class="form-control" type="number" name="prixLocMax" required></td>
+          {% elseif 'prixLocMax' is not empty %}
+          <td><input class="form-control" type="number" name="prixLocMin" required></td>
+          <td><input class="form-control" type="number" name="prixLocMax"></td>
+          {% else %}
+          <td><input class="form-control" type="number" name="prixLocMin"></td>
+          <td><input class="form-control" type="number" name="prixLocMax"></td>
+          {% endif %}#}
+          <td><input type="submit" class="btn btn-secondary" value="Recherche"></td>
+          </tr>
+
+        </table>
+
+      </form>
+    </div>
 
     {#<a href="{{ path('rechercheAppart') }}"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Recherche</button></a>#}
     {% if app.user %}
     <a href="{{ path('ajoutAppart') }}"><button type="submit" class="btn btn-success">Ajouter un nouvelle appartement</button></a>
     {% endif %}
+
+    {#<table>
+      <tr>
+        {% if app.user %}
+        <th>Numéro d'appartement</th>
+        {% endif %}
+        <th>Type d'appartement</th>
+        <th>Prix de location</th>
+        <th>Prix Charge</th>
+        <th>Rue</th>
+        <th>Arrondissement</th>
+        <th>Etage</th>
+        <th>Ascenseur</th>
+        <th>Préavis</th>
+        <th>Date libre</th>
+        {% if app.user %}
+        <th>Propriétaire</th>
+        <th>Locataire</th>
+        {% endif %}
+      </tr>
+    {% for appartement in appartements %}
+      <tr>
+        {% if app.user %}
+        <td>{{ appartement.numappart }}</td>
+        {% endif %}
+        <td>{{ appartement.typeappart }}</td>
+        <td>{{ appartement.prixLoc }}</td>
+        <td>{{ appartement.prixCharg }}</td>
+        <td>{{ appartement.rue }}</td>
+        <td>{{ appartement.arrondissappart }}</td>
+        <td>{{ appartement.etage }}</td>
+        <td>{% if appartement.ascenseur == '1'%}Oui
+        {% else %}Non{% endif %}</td>
+        <td>{% if appartement.preavis == '1' %}Oui
+        {% else %}Non{% endif %}</td>
+        <td>{{ appartement.datelibre | date("d/m/Y") }}</td>
+        {% if app.user %}
+        
+          <td><a href="{{ path('detailproprio', {'numappart':appartement.numappart, 'numeroprop':appartement.proprietaire})}}">
+            <button type="submit" class="btn btn-light">Détail</button>
+          </a></td>
+          <td><a href="{{ path('detailloc', {'numappart':appartement.numappart, 'numeroloc':appartement.locataire})}}">
+            <button type="submit" class="btn btn-light">Détail</button>
+          </a></td>
+          <td><a href="{{ path('modifierAppart', {'numappart':appartement.numappart}) }}">
+            <button type="submit" class="btn btn-info">Modifier</button>
+          </a></td>
+          <td><a href="{{ path('supprimerAppart', {'numappart':appartement.numappart}) }}">
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+          </a></td>
+        
+        {% endif %}
+
+      </tr>
+    {% endfor %}
+    </table>#}
 
     <table>
       <tr>
@@ -72,32 +174,32 @@
     {% for appartement in appartements %}
       <tr>
         {% if app.user %}
-        <td>{{ appartement.numappart }}</td>
+        <td>{{ appartement.NUMAPPART }}</td>
         {% endif %}
-        <td>{{ appartement.typeappart }}</td>
-        <td>{{ appartement.prixLoc }}</td>
-        <td>{{ appartement.prixCharg }}</td>
-        <td>{{ appartement.rue }}</td>
-        <td>{{ appartement.arrondissappart }}</td>
-        <td>{{ appartement.etage }}</td>
-        <td>{% if appartement.ascenseur == '1'%}Oui
+        <td>{{ appartement.TYPAPPART }}</td>
+        <td>{{ appartement.PRIX_LOC }}</td>
+        <td>{{ appartement.PRIX_CHARG }}</td>
+        <td>{{ appartement.RUE }}</td>
+        <td>{{ appartement.ARRONDISSEMENT }}</td>
+        <td>{{ appartement.ETAGE }}</td>
+        <td>{% if appartement.ASCENSEUR == '1'%}Oui
         {% else %}Non{% endif %}</td>
-        <td>{% if appartement.preavis == '1' %}Oui
+        <td>{% if appartement.PREAVIS == '1' %}Oui
         {% else %}Non{% endif %}</td>
-        <td>{{ appartement.datelibre | date("d/m/Y") }}</td>
+        <td>{{ appartement.DATE_LIBRE | date("d/m/Y") }}</td>
         {% if app.user %}
         {#{% for propriétaires in appartements %}#}
         
-          <td><a href="{{ path('detailproprio', {'numappart':appartement.numappart, 'numeroprop':appartement.proprietaire})}}">
+          <td><a href="{{ path('detailproprio', {'numappart':appartement.NUMAPPART, 'numeroprop':appartement.NUMEROPROP})}}">
             <button type="submit" class="btn btn-light">Détail</button>
           </a></td>
-          <td><a href="{{ path('detailloc', {'numappart':appartement.numappart, 'numeroloc':appartement.locataire})}}">
+          <td><a href="{{ path('detailloc', {'numappart':appartement.NUMAPPART, 'numeroloc':appartement.NUMEROLOC})}}">
             <button type="submit" class="btn btn-light">Détail</button>
           </a></td>
-          <td><a href="{{ path('modifierAppart', {'numappart':appartement.numappart}) }}">
+          <td><a href="{{ path('modifierAppart', {'numappart':appartement.NUMAPPART}) }}">
             <button type="submit" class="btn btn-info">Modifier</button>
           </a></td>
-          <td><a href="{{ path('supprimerAppart', {'numappart':appartement.numappart}) }}">
+          <td><a onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette appartement ?')" href="{{ path('supprimerAppart', {'numappart':appartement.NUMAPPART}) }}">
             <button type="submit" class="btn btn-danger">Supprimer</button>
           </a></td>
         

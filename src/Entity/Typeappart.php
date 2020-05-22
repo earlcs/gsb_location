@@ -31,12 +31,12 @@ class Typeappart
         $this->typeAppart = $typeAppart;
 
         return $this;
-    }
+    }*/
 
     public function __toString()
     {
-        return $this->typeAppart;
-    }*/
+        return (string) $this->getTypeAppart();
+    }
 
 
 }

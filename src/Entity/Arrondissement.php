@@ -71,4 +71,9 @@ class Arrondissement
         return $this->arrondissDem;
     }
 
+    public function __toString()
+    {
+        return (string) $this->getArrondissDem();
+    }
+
 }

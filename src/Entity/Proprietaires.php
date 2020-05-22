@@ -73,7 +73,7 @@ class Proprietaires
 
     public function setNom(string $nom): self
     {
-        $this->nom = $nom;
+        $this->nom = strtoupper($nom);
 
         return $this;
     }
@@ -83,16 +83,16 @@ class Proprietaires
         return $this->prenom;
     }
 
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = ucfirst(strtolower($prenom));
+
+        return $this;
+    }
+
     public function getProprio()
     {
         return $this->proprio = $this->getNomPrenom()->getNumeroprop();
-    }
-
-    public function setPrenom(string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
     }
 
     public function getNomPrenom(): ?string

@@ -1,0 +1,88 @@
+<table>
+      <tr>
+        {% if app.user %}
+        <th>Numéro d'appartement</th>
+        {% endif %}
+        <th>Type d'appartement</th>
+        <th>Prix de location</th>
+        <th>Prix Charge</th>
+        <th>Rue</th>
+        <th>Arrondissement</th>
+        <th>Etage</th>
+        <th>Ascenseur</th>
+        <th>Préavis</th>
+        <th>Date libre</th>
+        {% if app.user %}
+        <th>Propriétaire</th>
+        <th>Locataire</th>
+        {% endif %}
+        <!--<th>NumAppart</th>-->
+      </tr>
+    {% for appartement in appartements %}
+      <tr>
+        {% if app.user %}
+        <td>{{ appartement.NUMAPPART }}</td>
+        {% endif %}
+        <td>{{ appartement.TYPAPPART }}</td>
+        <td>{{ appartement.PRIX_LOC }}</td>
+        <td>{{ appartement.PRIX_CHARG }}</td>
+        <td>{{ appartement.RUE }}</td>
+        <td>{{ appartement.ARRONDISSEMENT }}</td>
+        <td>{{ appartement.ETAGE }}</td>
+        <td>{% if appartement.ASCENSEUR == '1'%}Oui
+        {% else %}Non{% endif %}</td>
+        <td>{% if appartement.PREAVIS == '1' %}Oui
+        {% else %}Non{% endif %}</td>
+        <td>{{ appartement.DATE_LIBRE | date("d/m/Y") }}</td>
+        {% if app.user %}
+        {#{% for propriétaires in appartements %}#}
+        
+          <td><a href="{{ path('detailproprio', {'numappart':appartement.NUMAPPART, 'numeroprop':appartement.NUMEROPROP})}}">
+            <button type="submit" class="btn btn-light">Détail</button>
+          </a></td>
+          <td><a href="{{ path('detailloc', {'numappart':appartement.NUMAPPART, 'numeroloc':appartement.NUMEROLOC})}}">
+            <button type="submit" class="btn btn-light">Détail</button>
+          </a></td>
+          <td><a href="{{ path('modifierAppart', {'numappart':appartement.NUMAPPART}) }}">
+            <button type="submit" class="btn btn-info">Modifier</button>
+          </a></td>
+          <td><a href="{{ path('supprimerAppart', {'numappart':appartement.NUMAPPART}) }}">
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+          </a></td>
+        
+        {#{% endfor %}#}
+        {% endif %}
+
+      </tr>
+    {% endfor %}
+    </table>
+
+
+
+
+
+recherche :
+
+<label>Type d'appartement </label>
+      <select name='typeappart' class="form-control">
+          <option value=''></option>
+        {% for type in types %}
+          <option value='{{type.typeappart}}'>{{type.typeappart}}</option>
+        {% endfor %}
+      </select>
+      
+      <label>Arrondissement </label>
+      <select name='arrondissement' class="form-control">
+          <option value=''></option>
+        {% for arrondissement in arrondissements %}
+          <option value='{{arrondissement.arrondissDem}}'>{{arrondissement.arrondissDem}}</option>
+        {% endfor %}
+      </select><br>
+      
+      <label>Prix minimum de la location </label>
+      <input class="form-control" type="number" name="prixLocMin">
+
+      <label>Prix maximum de la location </label>
+      <input class="form-control" type="number" name="prixLocMax">
+      
+      <input type="submit" class="btn btn-secondary my-2 my-sm-0" value="Recherche">

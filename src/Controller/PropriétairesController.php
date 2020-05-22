@@ -19,7 +19,7 @@ class PropriétairesController extends AbstractController
     public function getPropriétaires()
     {
         $propriétaires = $this->getDoctrine()->getRepository(Proprietaires::class)->findAll();
-        
+        dump($propriétaires);
         return $this->render('propriétaire/listeProprio.html.twig', array(
             'propriétaires' => $propriétaires,
         ));
@@ -50,6 +50,7 @@ class PropriétairesController extends AbstractController
             return $this->redirectToRoute('listeproprio');
 
         };
+        dump($proprio);
 
         return $this->render('propriétaire/ajoutProprio.html.twig', [
             'form_proprio' => $form->createView(),
@@ -65,7 +66,7 @@ class PropriétairesController extends AbstractController
     public function getIdProprio($numeroprop)
     {
         $proprio = $this->getDoctrine()->getRepository(Proprietaires::class)->find($numeroprop);
-
+        dump($proprio);
         return $this->render('propriétaire/showProprio.html.twig', [
             'numeroprop' => $proprio,
         ]);
@@ -93,6 +94,7 @@ class PropriétairesController extends AbstractController
             return $this->redirectToRoute('listeproprio');
 
         };
+        dump($proprio);
 
         return $this->render('propriétaire/ajoutProprio.html.twig', [
             'form_proprio' => $form->createView(),

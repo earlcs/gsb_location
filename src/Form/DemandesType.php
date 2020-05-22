@@ -44,13 +44,13 @@ class DemandesType extends AbstractType
                     'class' => "form-control",
                 ]
             ])
-            ->add('arrondissDem', EntityType::class, [
+            /*->add('arrondissDem', EntityType::class, [
                 'class' => Arrondissement::class,
                 'choice_label' => 'arrondissDem',
                 'attr' => [
                     'class' => "form-control",
                 ]
-            ])
+            ])*/
         ;
     }
 

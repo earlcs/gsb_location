@@ -12,6 +12,7 @@ use App\Form\ModifAppartType;
 use App\Entity\Arrondissement;
 use App\Form\AppartementsType;
 use App\Form\RechercheAppartType;
+use Doctrine\ORM\EntityRepository;
 use App\Controller\AppartementsController;
 use App\Repository\AppartementsRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,7 +58,7 @@ class AppartementsController extends AbstractController
             return $this->redirectToRoute('listeAppart');
 
         };
-
+        dump($appart);
         return $this->render('appartement/ajoutAppart.html.twig', [
             'form_appart' => $form->createView(),
         ]);
@@ -69,54 +70,136 @@ class AppartementsController extends AbstractController
      * 1 - affiche la liste des appartements
      * 2 - retourne les appartements en fonction des éléments sélectionnés dans le formulaire de recherche
      */
-    public function getAppart(/*$numappart,*/ Request $request)
+    /*public function getAppart(Request $request)
     {
-
+    
         $entity = new Appartements();
         $em = $this->getDoctrine()->getManager();
         //$id = $em->getRepository(Appartements::class)->find($numappart);
-
+        $appart = $em->getRepository(Appartements::class)->findAll();
+    
         $form = $this->createForm(RechercheAppartType::class, $entity);
         $form->handleRequest($request);
         //$em = $this->getDoctrine()->getManager();
         //$numappart = $em->getRepository(Appartements::class)->find($numappart);
-        
             
-        if($form->isSubmitted() && $form->isValid()){
-
-            $data = $form->getData();  //récupère les informations du formulaire de recherche
                 
-            $appart = $em->getRepository(Appartements::class)->findBy(['typappart' => $data->getTypeappart(), 'prixLoc' => $data->getPrixLoc(), 'arrondissement' => $data->getArrondissappart()]);
+        if($form->isSubmitted() && $form->isValid() && $request->isMethod("post")){*/
+    
+            /*$niveau = $request->get('niveau');
+            $appart = $em->getRepository(Appartements::class)->findBy(['typappart' => $niveau]);*/
+            
+            /*$data = $form->getData();  //récupère les informations du formulaire de recherche
+            //$type = $form->get('typappart');
+            //$arrondiss = $form->get('arrondissement');
+            //$prix = $form->get('prixLoc');
+            
+            $appart = $em->getRepository(Appartements::class)->findBy(['typappart' => $data->getTypeappart(), 'arrondissement' => $data->getArrondissappart(), 'prixLoc' => $data->getPrixLoc()]);
+            //$appart = $em->getRepository(Appartements::class)->findBy(['typappart' => $type, 'arrondissement' => $arrondiss, 'prixLoc' => $prix]);
             $req = 'SELECT * FROM appartements a WHERE a.typappart IN (SELECT typeAppart FROM typeappart t WHERE t.typeAppart="'.$data->getTypeappart().'")'.
-                   ' AND a.arrondissement IN (SELECT arrondissDem FROM arrondissement ar WHERE ar.arrondissDem='.$data->getArrondissappart().') AND a.prixLoc>='.$data->getPrixLoc().';';
+                   ' AND a.arrondissement IN (SELECT arrondissDem FROM arrondissement ar WHERE ar.arrondissDem='.$data->getArrondissappart().') AND a.prixLoc>='.$data->getPrixLoc().';';*/
+            /*$req = 'SELECT * FROM appartements a WHERE a.typappart IN (SELECT typeAppart FROM typeappart t WHERE t.typeAppart="'.$type.'")'.
+                   ' AND a.arrondissement IN (SELECT arrondissDem FROM arrondissement ar WHERE ar.arrondissDem='.$arrondiss.') AND a.prixLoc>='.$prix.';';*/
+            /*$req = 'select * from appartements where typappart="'.$type.'" and arrondissement='.$arrondiss.' and prixLoc>='.$prix.';';*/
 
-            //$req = 'select * from appartements where typappart="'.$data->getTypeappart().'" and arrondissement='.$data->getArrondissappart().' and prixLoc>='.$data->getPrixLoc().';';
+            //$req = 'select * from appartements where TYPAPPART="'.$data->getTypeappart().'" and ARRONDISSEMENT='.$data->getArrondissappart().' and PRIX_LOC>='.$data->getPrixLoc().';';
+            //$req = 'select * from appartements a join typeappart t on a.TYPAPPART=t.TYPE_APPART and join arrondissement ar on a.ARRONDISSEMENT=ar.ARRONDISS_DEM where t.TYPE_APPART="'.$data->getTypeappart().'" and ar.ARRONDISS_DEM='.$data->getArrondissappart().' and PRIX_LOC>='.$data->getPrixLoc().';';
 
-            $sql = $em->getConnection()->prepare($req);
+            /*$sql = $em->getConnection()->prepare($req);
             $sql->execute();
-
+    
             $rs = $sql->fetchAll();
-                
-        }
-        else{
+                    
+        }*/
+        /*else{
             $appart = $em->getRepository(Appartements::class)->findAll();
-        }
-
+        }*/
+    
         /*return $this->render('appartement/rechercheAppart.html.twig', [
             'appartements' => $entity,
             'form_recherche' => $form->createView(),
         ]);*/
-
-
+    
+    
         //$appart = $this->getDoctrine()->getRepository(Appartements::class)->findAll();
-
-        return $this->render('appartement/listeAppart.html.twig', array(
+    
+        /*return $this->render('appartement/listeAppart.html.twig', array(
             //'appartement' => $id,
             'appartements' => $appart,
             'form_recherche' => $form->createView(),
 
         ));
+            
+    }*/
+
+    /**
+     * @Route("/appartement/liste", name="listeAppart")
+     */
+    public function getAppart(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        //$typappart = $em->getRepository(Typeappart::class)->findAll();
+        //$appart = $em->getRepository(Appartements::class)->findAll();
+        $req = "select * from appartements";
+        $typeappart = $em->getRepository(Typeappart::class)->findAll();
+        $arrondissement = $em->getRepository(Arrondissement::class)->findAll();
+
+        if($request->isMethod("post")){
+            
+            $type = $request->get('typeappart');
+            $arrondiss = $request->get('arrondissement');
+            $prixMin = $request->get('prixLocMin');
+            $prixMax = $request->get('prixLocMax');
+            //$typappart = $em->getRepository(Typeappart::class)->findBy(['typeAppart' => $type]);
+            //$arrondissement = $em->getRepository(Arrondissement::class)->findBy(['arrondissement' => $arrondiss]);
+            //$prixLoc = $em->getRepository(Appartements::class)->findBy(['pricLoc' => $prix]);
+            if($type !== null && $arrondiss == null && $prixMin == null && $prixMax == null){
+                //$appart = $em->getRepository(Appartements::class)->findBy(['typappart' => $type]);
+                $req = "select * from appartements where TYPAPPART='".$type."';";
+            }elseif($arrondiss !== null && $type == null && $prixMin == null && $prixMax == null){
+                //$appart = $em->getRepository(Appartements::class)->findBy(['arrondissement' => $arrondiss]);
+                $req = "select * from appartements where ARRONDISSEMENT=".$arrondiss.";";
+            }elseif($prixMin !== null && $prixMax !== null && $type == null && $arrondiss == null){
+                //$appart = $em->getRepository(Appartements::class)->findBy(['prixLoc' => $prix]);
+                $req = "select * from appartements where PRIX_LOC BETWEEN ".$prixMin." AND ".$prixMax." order by PRIX_LOC;";
+            }elseif($type !== null && $arrondiss !== null && $prixMin == null && $prixMax == null){
+                //$appart = $em->getRepository(Appartements::class)->findBy(['typappart' => $type, 'arrondissement' => $arrondiss]);
+                $req = "select * from appartements where TYPAPPART='".$type."' and ARRONDISSEMENT=".$arrondiss.";";
+            }elseif($type !== null && $prixMin !== null && $prixMax !== null && $arrondiss == null){
+                //$appart = $em->getRepository(Appartements::class)->findBy(['typappart' => $type, 'prixLoc' => $prix]);
+                $req = "select * from appartements where TYPAPPART='".$type."' and PRIX_LOC BETWEEN ".$prixMin." AND ".$prixMax.";";
+            }elseif($arrondiss !== null && $prixMin !== null && $prixMax !== null && $type == null){
+                //$appart = $em->getRepository(Appartements::class)->findBy(['prixLoc' => $prix, 'arrondissement' => $arrondiss]);
+                $req = "select * from appartements where PRIX_LOC BETWEEN ".$prixMin." AND ".$prixMax." and ARRONDISSEMENT=".$arrondiss.";";
+            }else{
+                //$appart = $em->getRepository(Appartements::class)->findBy(['typappart' => $type, 'arrondissement' => $arrondiss, 'prixLoc' => $prix]);
+                $req = "select * from appartements where TYPAPPART='".$type."' and ARRONDISSEMENT=".$arrondiss." and PRIX_LOC BETWEEN ".$prixMin." AND ".$prixMax.";";
+            }
+            /*dump($appart);
+            $sql = $em->getConnection()->prepare($req);
+            $sql->execute();
+    
+            $rs = $sql->fetchAll();*/
+        }
         
+        $sql = $em->getConnection()->prepare($req);
+        $sql->execute();
+        $rs = $sql->fetchAll();
+        dump($rs);
+        //$em->persist($appart);
+        //$em->flush();
+
+        return $this->render('appartement/listeAppart.html.twig', array(
+            //'appartement' => $id,
+            //'appartements' => $appart,
+            //'form_recherche' => $form->createView(),
+            'types' => $typeappart,
+            'arrondissements' => $arrondissement,
+            //'appartements' => $appart,
+            'appartements' => $rs,
+
+        ));
     }
 
     /**
@@ -136,6 +219,7 @@ class AppartementsController extends AbstractController
         $sql->execute();
 
         $rs = $sql->fetchAll();
+        dump($rs);
 
         return $this->render('appartement/showProprio.html.twig', [
             'appartement' => $appart,
@@ -161,6 +245,7 @@ class AppartementsController extends AbstractController
         $sql->execute();
 
         $rs = $sql->fetchAll();
+        dump($rs);
 
         return $this->render('appartement/showLoc.html.twig', [
             'appartement' => $appart,
@@ -207,10 +292,6 @@ class AppartementsController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $appart = $em->getRepository(Appartements::class)->find($numappart);
-
-        if (!$appart){
-            return $this->redirectToRoute('listeAppart');
-        }
 
         $em->remove($appart);
         $em->flush();

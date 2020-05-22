@@ -112,7 +112,7 @@ class AppartementsType extends AbstractType
                 'class' => 'btn btn-success',
                 
             ]
-            ));
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

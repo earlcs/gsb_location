@@ -16,12 +16,14 @@ class ProprietairesType extends AbstractType
             ->add('nom', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'style' => "text-transform: uppercase",
                     'placeholder' => "NOM"
                 ]
             ])
             ->add('prenom', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'style' => "text-transform: capitalize",
                     'placeholder' => "Prénom"
                 ]
             ])

@@ -1,0 +1,6 @@
+[0521/161406.368:ERROR:file_io_win.cc(179)] CreateFile C:\Users\Casiano\AppData\Local\Google\Chrome\User Data\Crashpad\settings.dat: Accès refusé. (0x5)
+[0521/161406.376:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: Le canal de communication a été fermé. (0x6D)
+[0521/161406.382:ERROR:file_io_win.cc(179)] CreateFile C:\Users\Casiano\AppData\Local\Google\Chrome\User Data\Crashpad\settings.dat: Accès refusé. (0x5)
+[0522/114059.524:ERROR:file_io_win.cc(179)] CreateFile C:\Users\Casiano\AppData\Local\Google\Chrome\User Data\Crashpad\settings.dat: Accès refusé. (0x5)
+[0522/114059.533:ERROR:registration_protocol_win.cc(131)] TransactNamedPipe: Le canal de communication a été fermé. (0x6D)
+[0522/114059.537:ERROR:file_io_win.cc(179)] CreateFile C:\Users\Casiano\AppData\Local\Google\Chrome\User Data\Crashpad\settings.dat: Accès refusé. (0x5)

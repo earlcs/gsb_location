@@ -19,12 +19,14 @@ class LocatairesType extends AbstractType
             ->add('nomLoc', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'style' => "text-transform: uppercase",
                     'placeholder' => "NOM"
                 ]
             ])
             ->add('prenomLoc', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'style' => "text-transform: capitalize",
                     'placeholder' => "Prénom"
                 ]
             ])
@@ -35,6 +37,7 @@ class LocatairesType extends AbstractType
                 ]
             ])
             ->add('telLoc', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Ex : 0123456789',

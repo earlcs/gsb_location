@@ -20,7 +20,7 @@ class ClientsController extends AbstractController
     public function getClients()
     {
         $clients = $this->getDoctrine()->getRepository(Clients::class)->findAll();
-        
+        dump($clients);
         return $this->render('client/listeClient.html.twig', array(
             'clients' => $clients,
         ));
@@ -58,6 +58,7 @@ class ClientsController extends AbstractController
             }
 
         };
+        dump($client);
 
         return $this->render('client/ajoutClient.html.twig', [
             'form_client' => $form->createView(),
@@ -105,6 +106,7 @@ class ClientsController extends AbstractController
             return $this->redirectToRoute('clients');
 
         };
+        dump($client);
 
         return $this->render('client/ajoutClient.html.twig', [
             'form_client' => $form->createView(),

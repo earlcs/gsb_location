@@ -17,12 +17,14 @@ class ClientsType extends AbstractType
                 ->add('nomCli', TextType::class, [
                     'attr' => [
                         'class' => "form-control",
+                        'style' => "text-transform: uppercase",
                         'placeholder' => "NOM"
                     ]
                 ])
                 ->add('prenomCli', TextType::class, [
                     'attr' => [
                         'class' => "form-control",
+                        'style' => "text-transform: capitalize",
                         'placeholder' => "Prénom"
                     ]
                 ])

@@ -216,6 +216,18 @@ class Appartements
         return $this;
     }
 
+    /*public function getArrondissappart(): ?Arrondissement
+    {
+        return $this->arrondissappart;
+    }
+
+    public function setArrondissappart(Arrondissement $arrondissappart): self
+    {
+        $this->arrondissappart = $arrondissappart;
+
+        return $this;
+    }*/
+
     public function getArrondissement(): ?Arrondissement
     {
         return $this->arrondissement;
@@ -366,7 +378,10 @@ class Appartements
         return $this;
     }
 
-    
+    /*public function __toString(): ?string
+    {
+        return $this->getTypAppart();
+    }*/
 
 
 }
