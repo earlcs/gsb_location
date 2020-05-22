@@ -11,7 +11,7 @@ doctrine:
         host: mysql-earlcasiano-ppe4.alwaysdata.net
         port: 3306
         user: 206101
-        password: Ecasiano17#J
+        password: Ecasiano17
         driver: 'pdo_mysql'
         #charset: UTF8
         server_version: '5.7'
