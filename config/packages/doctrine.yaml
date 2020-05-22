@@ -12,11 +12,11 @@ doctrine:
         #port: 3306
         #user: root
         #password: null
-        dbname: earlcasiano-ppe4_gsb
-        host: mysql-earlcasiano-ppe4.alwaysdata.net
+        dbname: bzk2gc4wqhqg7k5vcknr
+        host: bzk2gc4wqhqg7k5vcknr-mysql.services.clever-cloud.com
         port: 3306
-        user: 206101
-        password: Ecasiano17
+        user: uxojeg6digo0n6x9
+        password: X05DM8o7t8hn8dYFq7Ei
         driver: 'pdo_mysql'
         #charset: UTF8
         server_version: '5.7'
