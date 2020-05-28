@@ -9,12 +9,6 @@
 
 <div id="contenu">
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
-
     <h3>Consultation des cotisations</h3>
     <table>
       <tr>
@@ -35,7 +29,7 @@
         <td>{{ propriétaire.ADRESSE }}</td>
         <td>{{ propriétaire.CODE_VILLE }}</td>
         <td>{{ propriétaire.TEL }}</td>
-        <td>{{ propriétaire.TOTAL_COTISATION | round(2,'common') }}</td>  {#arrondi la valeur au dixième près#}
+        <td>{{ propriétaire.TOTAL_COTISATION | number_format(2,'.') }}</td>  {#arrondi la valeur au dixième près#}
         <td><a href="{{ path('detailcotisation', {'numeroprop':propriétaire.NUMEROPROP})}}">
             <button type="submit" class="btn btn-light">Détail</button>
           </a></td>
