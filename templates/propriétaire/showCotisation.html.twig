@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!--<form class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="text" placeholder="Search">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+</form><br>-->
+
+<div id="contenu">
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h3>Détail des cotisations</h3>
+    <a href="{{ path('cotisation') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a><br><br>
+    <table>
+      <tr>
+        <th>Numéro d'appartement</th>
+        <th>Prix de location</th>
+        <th>Cotisation</th>
+      </tr>
+    {% for appartement in appartements %}
+      <tr>
+        <td>{{ appartement.NUMAPPART }}</td>
+        <td>{{ appartement.PRIX_LOC }}</td>
+        <td>{{ appartement.APPART_COTISATION | round(2,'common') }}</td>  {#arrondi la valeur au dixième près#}
+        
+      </tr>
+      <b>Montant total des cotisations : {{ appartement.TOTAL_COTISATION | round(2,'common') }}€</b>  {#arrondi la valeur au dixième près#}
+    {% endfor %}
+    </table>
+    
+
+</div>
+
+{% endblock %}
