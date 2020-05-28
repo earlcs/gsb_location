@@ -119,18 +119,22 @@ class AppartementsController extends AbstractController
     {
         
         $em = $this->getDoctrine()->getManager();
-        $proprio = $em->getRepository(Appartements::class)->find($numeroprop);
         $req = 'select NUMAPPART, PRIX_LOC, (PRIX_LOC*0.07) as APPART_COTISATION, SUM(PRIX_LOC*0.07) as TOTAL_COTISATION from appartements WHERE NUMEROPROP='.$numeroprop.';';
-
+        $req2= 'select SUM(PRIX_LOC*0.07) as TOTAL_COTISATION from appartements where NUMEROPROP='.$numeroprop.';';
+        
         $sql = $em->getConnection()->prepare($req);
         $sql->execute();
 
+        $sql2 = $em->getConnection()->prepare($req2);
+        $sql2->execute();
+
         $rs = $sql->fetchAll();
+        $rs2 = $sql2->fetchAll();
         //dump($rs);
 
         return $this->render('propriétaire/showCotisation.html.twig', [
-            'propriétaire' => $proprio,
             'appartements' => $rs,
+            'cotisations' => $rs2,
         ]);
 
     }
