@@ -7,16 +7,11 @@ parameters:
 doctrine:
     dbal:
         # configure these for your database server
-        #dbname: gsb_location
-        #host: 127.0.0.1
-        #port: 3306
-        #user: root
-        #password: null
-        dbname: bzk2gc4wqhqg7k5vcknr
-        host: bzk2gc4wqhqg7k5vcknr-mysql.services.clever-cloud.com
+        dbname: gsb_location
+        host: 127.0.0.1
         port: 3306
-        user: uxojeg6digo0n6x9
-        password: X05DM8o7t8hn8dYFq7Ei
+        user: root
+        password: null
         driver: 'pdo_mysql'
         #charset: UTF8
         server_version: '5.7'
