@@ -18,7 +18,7 @@
     <h3>Détail des cotisations</h3>
     <a href="{{ path('cotisation') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a><br><br>
     {% for cotisation in cotisations %}
-      <b>Montant total des cotisations : {{ cotisation.TOTAL_COTISATION | round(2,'common') }}€</b>   {#arrondi la valeur au dixième près#}
+      <b>Montant total des cotisations : {{ cotisation.TOTAL_COTISATION | number_format(2,'.') }}€</b>   {#arrondi la valeur au dixième près#}
     {% endfor %}
     <table>
       <tr>
@@ -30,7 +30,7 @@
       <tr>
         <td>{{ appartement.NUMAPPART }}</td>
         <td>{{ appartement.PRIX_LOC }}</td>
-        <td>{{ appartement.APPART_COTISATION | round(2,'common') }}</td>  {#arrondi la valeur au dixième près#}
+        <td>{{ appartement.APPART_COTISATION | number_format(2,'.') }}</td>  {#arrondi la valeur au dixième près#}
         
       </tr>
     {% endfor %}
