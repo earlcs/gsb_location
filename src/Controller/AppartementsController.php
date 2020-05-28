@@ -161,6 +161,30 @@ class AppartementsController extends AbstractController
         ]);
 
     }
+    
+    /**
+     * @Route("/appartement/cotisation", name="cotisation")
+     * 
+     * retourne le montant total des cotisations pour chaque propriétaire
+     */
+    public function getCotisation()
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        $req = 'select distinct a.NUMEROPROP, p.NOM, p.PRENOM, p.ADRESSE, p.CODE_VILLE, p.TEL, SUM(PRIX_LOC*0.07) as TOTAL_COTISATION 
+        from appartements a join proprietaires p on a.NUMEROPROP=p.NUMEROPROP group by a.NUMEROPROP';
+
+        $sql = $em->getConnection()->prepare($req);
+        $sql->execute();
+
+        $rs = $sql->fetchAll();
+        //dump($rs);
+
+        return $this->render('propriétaire/cotisation.html.twig', [
+            'propriétaires' => $rs,
+        ]);
+
+    }
 
     /**
      * @Route("/appartement/modifier/{numappart}", name="modifierAppart")
