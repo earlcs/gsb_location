@@ -9,12 +9,6 @@
 
 <div id="contenu">
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
-
     <h3>Détail des cotisations</h3>
     <a href="{{ path('cotisation') }}"><button type="submit" class="btn btn-secondary my-2 my-sm-0">Retour</button></a><br><br>
     {% for cotisation in cotisations %}
