@@ -109,6 +109,31 @@ class AppartementsController extends AbstractController
 
         ));
     }
+    
+    /**
+     * @Route("/appartement/cotisation/propriétaire/{numeroprop}", name="detailcotisation")
+     * 
+     * retourne les cotisations de chaque appartement pour chaque propriétaire
+     */
+    public function getDetailCotisation($numeroprop)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        $proprio = $em->getRepository(Appartements::class)->find($numeroprop);
+        $req = 'select NUMAPPART, PRIX_LOC, (PRIX_LOC*0.07) as APPART_COTISATION, SUM(PRIX_LOC*0.07) as TOTAL_COTISATION from appartements WHERE NUMEROPROP='.$numeroprop.';';
+
+        $sql = $em->getConnection()->prepare($req);
+        $sql->execute();
+
+        $rs = $sql->fetchAll();
+        //dump($rs);
+
+        return $this->render('propriétaire/showCotisation.html.twig', [
+            'propriétaire' => $proprio,
+            'appartements' => $rs,
+        ]);
+
+    }
 
     /**
      * @Route("/appartement/{numappart}/propriétaire/{numeroprop}", name="detailproprio")
