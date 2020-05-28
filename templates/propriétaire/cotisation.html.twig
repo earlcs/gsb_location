@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!--<form class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="text" placeholder="Search">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+</form><br>-->
+
+<div id="contenu">
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h3>Consultation des cotisations</h3>
+    <a href="{{ path('ajoutproprio') }}"><button type="submit" class="btn btn-success">Ajouter un nouveau propriétaire</button></a>
+    <table>
+      <tr>
+        <th>Numéro de propriétaire</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Adresse</th>
+        <th>Code ville</th>
+        <th>Téléphone</th>
+        <th>Cotisation</th>
+        <th>Liste des appartements</th>
+      </tr>
+    {% for propriétaire in propriétaires %}
+      <tr>
+        <td>{{ propriétaire.NUMEROPROP }}</td>
+        <td>{{ propriétaire.NOM }}</td>
+        <td>{{ propriétaire.PRENOM }}</td>
+        <td>{{ propriétaire.ADRESSE }}</td>
+        <td>{{ propriétaire.CODE_VILLE }}</td>
+        <td>{{ propriétaire.TEL }}</td>
+        <td>{{ propriétaire.TOTAL_COTISATION | round(2,'common') }}</td>  {#arrondi la valeur au dixième près#}
+        <td><a href="{{ path('detailcotisation', {'numeroprop':propriétaire.NUMEROPROP})}}">
+            <button type="submit" class="btn btn-light">Détail</button>
+          </a></td>
+      </tr>
+    {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}
